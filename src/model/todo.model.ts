@@ -6,4 +6,6 @@ export interface Todo {
   id: number;
   created_at: Date;
   updated_at: Date;
+  start: Date;
+  end: Date;
 }

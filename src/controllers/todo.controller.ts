@@ -25,8 +25,9 @@ export const getTodo = async (req: Request, res: Response) => {
 };
 
 export const createTodo = async (req: Request, res: Response) => {
+  const todo: Todo = await req.body;
   const repo = new TodoRepository();
-  const todo: Todo = req.body;
+
   try {
     await repo.create(todo);
     res.status(201).json({ todo });
