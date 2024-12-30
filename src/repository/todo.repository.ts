@@ -3,6 +3,7 @@ import { Todo } from "../model/todo.model";
 
 export class TodoRepository {
   private readonly fileName = "todos.json";
+  static isntatnce: TodoRepository;
   constructor() {
     if (!fs.existsSync(this.fileName)) {
       fs.writeFileSync(this.fileName, "[]");
