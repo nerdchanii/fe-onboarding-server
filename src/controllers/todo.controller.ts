@@ -41,8 +41,11 @@ export const updateTodo = async (req: Request, res: Response) => {
   const repo = new TodoRepository();
   try {
     const todo: Todo = req.body;
+
     const oldTodo = await repo.getById(reqId);
-    const newtodo = repo.update(oldTodo, { ...oldTodo, ...todo });
+    console.log(oldTodo);
+    const newtodo = await repo.update(oldTodo, { ...todo, id: reqId });
+    console.log(newtodo);
     res.status(200).json({ todo: newtodo });
   } catch (error) {
     res.status(500).json({ message: ERROR_MESSAGE.INTERNAL_SERVER });

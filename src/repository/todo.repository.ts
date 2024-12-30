@@ -52,12 +52,13 @@ export class TodoRepository {
 
   public async update(oldTodo: Todo, newTodo: Todo): Promise<Todo> {
     const todos = await this.getTodos();
-    todos.reduce((acc, todo) => {
-      if (todo.id === oldTodo.id) acc.push(newTodo);
-      else acc.push(todo);
-      return acc;
-    }, [] as Todo[]);
-    await this.save(todos);
+    const newTodos = todos.map((todo) => {
+      if (todo.id === oldTodo.id) {
+        return newTodo;
+      }
+      return todo;
+    });
+    await this.save(newTodos);
     return newTodo;
   }
 
